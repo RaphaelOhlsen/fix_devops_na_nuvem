@@ -1,0 +1,30 @@
+1 – No módulo 2, aula 06, tempo 00:22:30 inicia falando sobre os certificados. Deixa bem claro que a aula não é sobre certificado mas logo em seguida levanta um container Docker com um certificado. Se o aluno for tentar subir este container ele não vai conseguir pois o certificado não é válido. E na aula 07 no tempo 00:02:00 você sobe novamente o ambiente com o certificado serviceCertificate.pfx e novamente o aluno não vai conseguir. 
+No meu caso eu tive que assistir a aula 09 de certificado e voltar novamente para a aula 09. Esta foi uma dificuldade que eu tive e que poderia ser corrigida a ordem das aulas e fazer avisos para que os alunos não se percam. Já vi alguns alunos perdidos neste exato ponto. 
+
+2 – No módulo 8, aula 09  sobre o assunto DocumentdB Cluster, ela tem como necessidade o aluno ter visto todo o conteúdo de Lambda. O aluno vendo esta aula na ordem atual vai se confundir pois você aborda tópicos que até então não foram abordados. Recomendo colocar este conteúdo depois da aula08 do módulo 09 que fala sobre AWS Lambdas 
+
+3 – No módulo 09, aula 09, no minuto 00:03:42 você inicia novamente a aula. Nada de grave mas vale a pena a edição do vídeo. Nesta aula ainda tive erro na execução da função lambda. Tive que alterar o código. 
+
+Linha 39 - const values = [body.Id];
+Linha 39 - const values = [id];
+
+Linha 44 - await publishToSns(JSON.stringify({Id: body.Id}));
+Linha 44 - await publishToSns(JSON.stringify({Id: id}));
+
+Para efetuar o teste eu entrei com 
+{
+   “Id”: 1 
+}
+
+Mas deu erro. 
+
+Pode ser que o API Gatway entrege este JSON de outra forma e que aí sim o código que você colocou nesta lambda function funcione 
+4 – No módulo 10, Aula 18-Update EC2 Hostnames / Node Names (Ansible Role) no tempo 00:05:00 no momento que se altera o podSubnet é interessante alterar também nos arquivos roles/container-network/tasks/custon-resource.yml e operator.yml 
+
+5 – Modulo 10, aula 10
+Quando você copia o arquivo worker-user-data-v2.sh e cola diretamente no campo user-data do Launch Template no Painel de Controle da AWS o arquivo não altera a configuração. Pode verificar abrindo a versão criada e verá que não aplicou 
+O que aconteceu
+•	No console da AWS: copy/paste + editor web pode introduzir CRLF, espaços invisíveis e “reflow”, e aí o \ no fim da linha quebra fácil.
+ Repare na linha 12   gpg\   não foi dado espaço deveria ficar assim gpg \
+O ideal para não dar erro de copy e paste no Windows é colocar tudo na mesma linha. Tentei achar todos os erros mas não consegui. Toquei o curso e pelo script ansible a alteração foi feita no user-data do Launch Template 
+Recomendo passar desta fase ou então alterar o código para que o painel de controle da AWS não encare como erro e persista a informação.
